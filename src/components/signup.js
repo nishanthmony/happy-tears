@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import { auth, fs } from '../Config/config'
 
 
 export const SignUp = () => {
+
+  const history = useHistory();
 
   const [Fullname, setFullname] = useState('');
   const [Email, setEmail] = useState('');
@@ -10,12 +13,38 @@ export const SignUp = () => {
   const [ConfirmPassword, setConfirmPassword] = useState('');
   const [MobileNumber, setMobileNumber] = useState('');
 
+
+
   const [ErrorMsg, setErrorMsg] = useState('');
   const [SuccessMsg, setSuccessMsg] = useState('');
 
   const handleSignup=(e)=>{
     e.preventDefault();
-    console.log(Fullname, Email, MobileNumber, Password, ConfirmPassword)
+    //console.log(Fullname, Email, MobileNumber, Password, ConfirmPassword)
+    auth.createUserWithEmailAndPassword(Email, Password).then((credentials)=>{
+        console.log(credentials);
+        fs.collection('users').doc(credentials.user.uid).set({
+            Fullname: Fullname,
+            Email: Email,
+            Password: Password,
+            MobileNumber: MobileNumber
+        }).then(()=>{
+            setSuccessMsg('Successfully logged in, now redirecting you to Login')
+            setFullname('');
+            setEmail('');
+            setPassword('');
+            setMobileNumber('');
+            setErrorMsg('');
+            setTimeout(()=>{
+                setSuccessMsg('');
+                history.push('/login');
+            },3000)
+        }).catch((error)=>{
+            setErrorMsg(error.message)
+        })
+    }).catch((error)=>{
+        setErrorMsg(error.message)
+    })
   }
 
   return (
@@ -24,6 +53,12 @@ export const SignUp = () => {
         <br></br>
         <h1>SignUp</h1>
         <hr></hr>
+        
+        {SuccessMsg&&<>
+            <div className='success-msg'>{SuccessMsg}</div>
+            <br></br>
+        </>}
+
         <form className='form-group' autoComplete='off' onSubmit={handleSignup}>
             <label>Full Name</label>
             <input type='text' className='form-control' required onChange={(e)=>setFullname(e.target.value)} value={Fullname}/>
@@ -45,6 +80,10 @@ export const SignUp = () => {
         </form>
         <br></br>
         <Link to = '/' className = 'link'>Skip Signup</Link>
+        {ErrorMsg&&<>
+            <div className='error-msg'>{ErrorMsg}</div>
+            <br></br>
+        </>}
         
     </div>
   )
