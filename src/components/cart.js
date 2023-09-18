@@ -106,6 +106,11 @@ export const Cart = () => {
     }
   }
 
+  //payments in stripe
+  const handleToken = (token) =>{
+    console.log(token);
+  }
+
   return (
     <>
       <Navbar user={user}/>
@@ -123,7 +128,12 @@ export const Cart = () => {
             <div>Total No of Products: <span>{totalQty}</span></div>
             <div>Total Price to Pay: <span>{totalAmt}</span></div>
             <br></br>
-            <StripeCheckout></StripeCheckout>
+            <StripeCheckout stripeKey='pk_test_51NrjrDSDRecEiH5dxSwRfYsMvacLHVq0FOGHXJFLAfHm5SoTDzlAVprTur3PBKRbKq8RTxTl57GUOf8PuXhHKW7q00b6aDsDSA' 
+            token={handleToken} 
+            billingAddress 
+            shippingAddress 
+            name='All Products' 
+            amount={totalAmt * 100}></StripeCheckout>
           </div>
         </div>
       )}

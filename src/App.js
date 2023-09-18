@@ -7,6 +7,10 @@ import { LogIn } from './components/login';
 import { Error } from './components/notfound'
 import { AddProducts } from './components/addProducts';
 import { Cart } from './components/cart'
+import { Support } from './components/support'
+import {Cancellation} from './components/cancellation'
+import {Terms} from './components/terms'
+import {PrivacyPolicy} from './components/privacyPolicy'
 
 const App = () => {
   return (
@@ -18,6 +22,10 @@ const App = () => {
         <Route path = '/login' component = {LogIn} />
         <Route path = '/add-products' component = {AddProducts} />
         <Route path = '/cart' component = {Cart} />
+        <Route path = '/support' component = {Support} />
+        <Route path = '/cancellation' component = {Cancellation} />
+        <Route path = '/terms-of-service' component = {Terms} />
+        <Route path = './privacy-policy' component = {PrivacyPolicy} />
         <Route component = {Error}/>
       </Switch>
 

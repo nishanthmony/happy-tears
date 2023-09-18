@@ -44,11 +44,16 @@
 
 /* navbar */
 .navbar{
+  overflow: hidden;
   width: 100%;
   padding: 24px;
   display: flex;
+  transition: 0.4s;
+  position: fixed;
   justify-content: space-between;
   align-items: center;
+  top: 0;
+  z-index: 99;
   background-color: lightpink;  
 }
 
@@ -62,11 +67,12 @@
 .navbar .logo{
   width: 150px;
   height: auto;
+  transition: 0.4s;
 }
 
 .navbar .logo img{
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
 }
 
 .navbar .rightside{
