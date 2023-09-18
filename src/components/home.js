@@ -63,6 +63,19 @@ export const Home = (props) => {
     getProducts();
   },[])
 
+  //state of total products in cart that will be displayed in the cart button on the navbar
+  const [totalProducts, setTotalProducts] = useState(0);
+  useEffect(()=>{
+    auth.onAuthStateChanged(user=>{
+      if(user){
+        fs.collection('Cart '+user.uid).onSnapshot(snapshot=>{
+          const qty = snapshot.docs.length;
+          setTotalProducts(qty);
+        })
+      }
+    })
+  },[])
+
   let DisplayProd;
 
   const addToCart = (DisplayProducts) =>{
@@ -82,7 +95,7 @@ export const Home = (props) => {
 
   return (
     <div>
-        <Navbar user={user}/>
+        <Navbar user={user} totalProducts={totalProducts}/>
         <br></br>
         {DisplayProducts.length > 0 && (
           <div className='container-fluid'>
