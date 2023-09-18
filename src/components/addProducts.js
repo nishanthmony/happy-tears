@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { fs, storage } from '../Config/config'
 
 export const AddProducts = () => {
 
@@ -30,7 +31,34 @@ export const AddProducts = () => {
 
   const handleAddProducts = (e) =>{
     e.preventDefault();
-    console.log(Title, Description, Price)
+    //console.log(Title, Description, Price);
+    //console.log(Image);
+    const uploadTask = storage.ref(`product-images/${Image.name}`).put(Image);
+    uploadTask.on('state_changed', snapshot=>{
+        const progress = (snapshot.bytesTransferred/snapshot.totalBytes)*100
+        console.log(progress);
+    }, error=>setUploadError(error.message),()=>{
+        storage.ref('product-images').child(Image.name).getDownloadURL().then(url=>{
+            fs.collection('Products').add({
+                Title,
+                Description,
+                Price: Number(Price),
+                url
+            }).then(()=>{
+                setSuccessMsg('Product added successfully');
+                setTitle('');
+                setDescription('');
+                setPrice('');
+                
+                document.getElementById('file').value='';
+                setImageError('');
+                setUploadError('');
+                setTimeout(()=>{
+                    setSuccessMsg('')
+                }, 3000)
+            }).catch(error=>setUploadError(error.message));
+        })
+    })
   }
 
   return (
@@ -66,8 +94,6 @@ export const AddProducts = () => {
         {UploadError&&<>
             <br></br>
             <div className='error-msg'>{UploadError}</div>
-            <br></br>
-
         </>}
     </div>
   )
