@@ -3,7 +3,23 @@ import { Navbar } from './navbar'
 import { Products } from './products'
 import { auth, fs } from '../Config/config'
 
-export const Home = () => {
+export const Home = (props) => {
+  //getting current user uid
+  function GetUserUid(){
+    const [uid, setUid] = useState(null);
+    useEffect(()=>{
+      auth.onAuthStateChanged(User=>{
+        if(User){
+          setUid(User.uid);
+        }
+      })
+    },[])
+    return uid;
+  }
+
+  const uid = GetUserUid();
+
+
   //current user information fuction
   function GetCurrentUser(){
     const [User, setUser] = useState(null);
@@ -47,6 +63,22 @@ export const Home = () => {
     getProducts();
   },[])
 
+  let DisplayProd;
+
+  const addToCart = (DisplayProducts) =>{
+    if(uid!==null){
+      //console.log(DisplayProducts);
+      DisplayProd = DisplayProducts
+      DisplayProd['qty'] = 1;
+      DisplayProd['TotalProductPrice'] = DisplayProd.qty*DisplayProd.Price;
+      fs.collection('Cart ' + uid).doc(DisplayProducts.ID).set(DisplayProd).then(()=>{
+        console.log('Successfully added to cart')
+      })
+    }else{
+      props.history.push('/login')
+    }
+  }
+
 
   return (
     <div>
@@ -56,7 +88,7 @@ export const Home = () => {
           <div className='container-fluid'>
             <h1 className='text-center'>Products</h1>
             <div className='products-box'>
-              <Products DisplayProducts = {DisplayProducts}/>
+              <Products DisplayProducts = {DisplayProducts} addToCart = {addToCart}/>
             </div>
           </div>
         )}
