@@ -29,7 +29,7 @@ export const Navbar = ({user}) => {
                 <div><Link to = 'Login'>Login</Link></div>
             </>}
             {user&&<>
-                <div className='navlink' to = '/'>{user}</div>
+                <div className='navlink' ><Link className='navlink' to = '/'>{user}</Link></div>
                 <div className='cart-menu-btn'>
                     <Link className='navlink' to='/cart'>
                         <Icon icon = {shoppingCart} size = {20} />
