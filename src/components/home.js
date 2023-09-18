@@ -49,7 +49,7 @@ export const Home = () => {
 
 
   return (
-    <>
+    <div>
         <Navbar user={user}/>
         <br></br>
         {DisplayProducts.length > 0 && (
@@ -63,6 +63,6 @@ export const Home = () => {
         {DisplayProducts.length < 1 && (
           <div className='container-fluid'>Please wait...</div>
         )}
-    </>
+    </div>
   )
 }
