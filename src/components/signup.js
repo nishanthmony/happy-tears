@@ -7,9 +7,9 @@ export const SignUp = () => {
 
   const history = useHistory();
 
-  const [Fullname, setFullname] = useState('');
-  const [Email, setEmail] = useState('');
-  const [Password, setPassword] = useState('');
+  const [fullName, setFullname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [ConfirmPassword, setConfirmPassword] = useState('');
   const [MobileNumber, setMobileNumber] = useState('');
 
@@ -21,12 +21,12 @@ export const SignUp = () => {
   const handleSignup=(e)=>{
     e.preventDefault();
     //console.log(Fullname, Email, MobileNumber, Password, ConfirmPassword)
-    auth.createUserWithEmailAndPassword(Email, Password).then((credentials)=>{
+    auth.createUserWithEmailAndPassword(email, password).then((credentials)=>{
         console.log(credentials);
         fs.collection('users').doc(credentials.user.uid).set({
-            Fullname: Fullname,
-            Email: Email,
-            Password: Password,
+            Fullname: fullName,
+            Email: email,
+            Password: password,
             MobileNumber: MobileNumber
         }).then(()=>{
             setSuccessMsg('Successfully logged in, now redirecting you to Login')
@@ -61,15 +61,15 @@ export const SignUp = () => {
 
         <form className='form-group' autoComplete='off' onSubmit={handleSignup}>
             <label>Full Name</label>
-            <input type='text' className='form-control' required onChange={(e)=>setFullname(e.target.value)} value={Fullname}/>
+            <input type='text' className='form-control' required onChange={(e)=>setFullname(e.target.value)} value={fullName}/>
             <label>Email</label>
-            <input type='email' className='form-control' required onChange={(e)=>setEmail(e.target.value)} value={Email}/>
+            <input type='email' className='form-control' required onChange={(e)=>setEmail(e.target.value)} value={email}/>
             <label>Age</label>
             <input type='number' className='form-control' required />
             <label>Mobile Number</label>
             <input type='number' className='form-control' required onChange={(e)=>setMobileNumber(e.target.value)} value={MobileNumber}/>
             <label>Password</label>
-            <input type='password' className='form-control' required onChange={(e)=>setPassword(e.target.value)} value={Password}/>
+            <input type='password' className='form-control' required onChange={(e)=>setPassword(e.target.value)} value={password}/>
             <label>Re Enter Password</label>
             <input type='password' className='form-control' required onChange={(e)=>setConfirmPassword(e.target.value)} value={ConfirmPassword}/>
             <br></br>

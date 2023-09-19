@@ -5,8 +5,8 @@ import { auth } from '../Config/config'
 export const LogIn = () => {
 
 
-  const [Email, setEmail] = useState('');
-  const [Password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [SuccessMsg, setSuccessMessage] = useState('');
   const [ErrorMessage, setErrorMessage] = useState('');
@@ -16,7 +16,7 @@ export const LogIn = () => {
   const handleLogin=(e)=>{
     e.preventDefault();
     //console.log(Email, Password)
-    auth.signInWithEmailAndPassword(Email, Password).then(()=>{
+    auth.signInWithEmailAndPassword(email, password).then(()=>{
       setSuccessMessage('Login Successful, wellcome to the world of Surprises')
       setEmail('');
       setPassword('');
@@ -41,10 +41,10 @@ export const LogIn = () => {
 
         <form className='form-group' autoComplete='off' onSubmit={handleLogin}>
             <label>Email ID</label>
-            <input type = 'email' className='form-control' required onChange={(e)=>setEmail(e.target.value)} value={Email}/>
+            <input type = 'email' className='form-control' required onChange={(e)=>setEmail(e.target.value)} value={email}/>
             <br></br>
             <label>Password</label>
-            <input type='password' className='form-control' required onChange={(e)=>setPassword(e.target.value)} value={Password}/>
+            <input type='password' className='form-control' required onChange={(e)=>setPassword(e.target.value)} value={password}/>
             <br></br>
 
             <div className='btn-box'>

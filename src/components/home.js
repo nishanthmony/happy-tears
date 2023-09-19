@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { Navbar } from './navbar'
 import { Products } from './products'
 import { auth, fs } from '../Config/config'
+import { HappyTears } from './happyTears'
 
 export const Home = (props) => {
   //getting current user uid
   function GetUserUid(){
     const [uid, setUid] = useState(null);
     useEffect(()=>{
-      auth.onAuthStateChanged(User=>{
-        if(User){
-          setUid(User.uid);
+      auth.onAuthStateChanged(user=>{
+        if(user){
+          setUid(user.uid);
         }
       })
     },[])
@@ -22,11 +23,11 @@ export const Home = (props) => {
 
   //current user information fuction
   function GetCurrentUser(){
-    const [User, setUser] = useState(null);
+    const [user, setUser] = useState(null);
     useEffect(()=>{
-      auth.onAuthStateChanged(User=>{
-        if (User) {
-          fs.collection('users').doc(User.uid).get().then(snapshot=>{
+      auth.onAuthStateChanged(user=>{
+        if (user) {
+          fs.collection('users').doc(user.uid).get().then(snapshot=>{
             setUser(snapshot.data().Fullname)
           })
         }else{
@@ -35,7 +36,7 @@ export const Home = (props) => {
       })
 
     }, [])
-    return User;
+    return user;
   }
 
   const user = GetCurrentUser();
@@ -97,6 +98,7 @@ export const Home = (props) => {
     <div>
         <Navbar user={user} totalProducts={totalProducts}/>
         <br></br>
+        <HappyTears />
         {DisplayProducts.length > 0 && (
           <div className='container-fluid'>
             <h1 className='text-center'>Products</h1>

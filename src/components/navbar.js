@@ -1,24 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import logo from '../assets/logo-circle.png'
 import { Icon } from 'react-icons-kit'
 import { shoppingCart } from 'react-icons-kit/feather'
 import { auth } from '../Config/config'
+import '../styles/navbar.css'
 
 export const Navbar = ({ user, totalProducts }) => {
-
-  //window.onscroll = function() {scrollFunction()};
-
-  // eslint-disable-next-line
-  function scrollFunction() {
-    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-      document.getElementById("navbar").style.padding = "30px 10px";
-      document.getElementById("logo").style.fontSize = "25px";
-    } else {
-      document.getElementById("navbar").style.padding = "80px 10px";
-      document.getElementById("logo").style.fontSize = "35px";
-    }
-  }
 
   const history = useHistory();
 
@@ -28,12 +16,25 @@ export const Navbar = ({ user, totalProducts }) => {
     })
   }
 
+  const [navbar, setNavbar] = useState(false);
+
+  const changeBackground = () =>{
+    console.log(window.scrollY);
+    if (window.scrollY >= 95){
+      setNavbar(true);
+    }else{
+      setNavbar(false);
+    }
+  }
+
+  window.addEventListener('scroll', changeBackground);
+
 
   return (
-    <div className='navbar'>
+    <div className={navbar ? 'navbar active' : 'navbar'}>
         <div className='leftside'>
             <div className='logo'>
-                <img src={logo} alt=''/>
+                <Link className='navlink' to = '/'><img src={logo} alt='' /></Link>
             </div>
         </div>
         <div className='rightside'>
@@ -42,7 +43,7 @@ export const Navbar = ({ user, totalProducts }) => {
                 <div><Link to = 'Login'>Login</Link></div>
             </>}
             {user&&<>
-                <div className='navlink' ><Link className='navlink' to = '/'>{user}</Link></div>
+                <div className='navlink' ><Link className='navlink' to = '/profile'>{user}</Link></div>
                 <div className='cart-menu-btn'>
                     <Link className='navlink' to='/cart'>
                         <Icon icon = {shoppingCart} size = {20} />

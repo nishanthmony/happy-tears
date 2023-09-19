@@ -1,6 +1,5 @@
 .navbar{
     position: sticky;
-}
-.navbar.active{
-    background: lightpink;
+    height: 95px;
+    z-index: 99;
 }

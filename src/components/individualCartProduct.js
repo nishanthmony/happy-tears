@@ -46,7 +46,7 @@ export const IndividualCartProduct = ({ cartProduct, cartProductIncrease, cartPr
         </div>
       </div>
       <div className='product-text cart-price'>₹ {cartProduct.TotalProductPrice}/-</div>
-      <div className='btn btn-danger btn-md cart-btn' onClick={handleCartProductDelete}>Remove</div>
+      <div className='btn btn-danger btn-md cart-btn' onClick={handleCartProductDelete}>DELETE</div>
     </div>
   )
 }
