@@ -8,20 +8,20 @@ export const Cart = () => {
 
   //current user information fuction
   function GetCurrentUser(){
-    const [User, setUser] = useState(null);
+    const [user, setUser]=useState(null);
     useEffect(()=>{
-      auth.onAuthStateChanged(User=>{
-        if (User) {
-          fs.collection('users').doc(User.uid).get().then(snapshot=>{
-            setUser(snapshot.data().Fullname)
-          })
-        }else{
-          setUser(null);
-        }
-      })
-
-    }, [])
-    return User;
+        auth.onAuthStateChanged(user=>{
+            if(user){
+                fs.collection('users').doc(user.uid).get().then(snapshot=>{
+                    setUser(snapshot.data().Fullname);
+                })
+            }
+            else{
+                setUser(null);
+            }
+        })
+    },[])
+    return user;
   }
 
   const user = GetCurrentUser();
@@ -55,7 +55,7 @@ export const Cart = () => {
   //sum the total quantity
   const reduceOfQty = (accumulator, currentValue)=>accumulator+currentValue;
   const totalQty = qty.reduce(reduceOfQty, 0);
-  console.log(totalQty)
+  //console.log(totalQty)
 
   const amt = cartProducts.map(cartProduct=>{
     return cartProduct.TotalProductPrice;

@@ -11,6 +11,7 @@ import { Support } from './components/support'
 import {Cancellation} from './components/cancellation'
 import {Terms} from './components/terms'
 import {PrivacyPolicy} from './components/privacyPolicy'
+import {Profile} from './components/profile'
 
 const App = () => {
   return (
@@ -25,7 +26,8 @@ const App = () => {
         <Route path = '/support' component = {Support} />
         <Route path = '/cancellation' component = {Cancellation} />
         <Route path = '/terms-of-service' component = {Terms} />
-        <Route path = './privacy-policy' component = {PrivacyPolicy} />
+        <Route path = '/privacy-policy' component = {PrivacyPolicy} />
+        <Route path = '/profile' component = {Profile} />
         <Route component = {Error}/>
       </Switch>
 

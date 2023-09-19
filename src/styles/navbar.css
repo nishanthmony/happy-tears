@@ -1,0 +1,6 @@
+.navbar{
+    position: sticky;
+}
+.navbar.active{
+    background: lightpink;
+}
