@@ -115,7 +115,7 @@ export const Cart = () => {
     <>
       <Navbar user={user}/>
       <br></br>
-      {cartProducts.length > 1 && (
+      {cartProducts.length >= 1 && (
         <div className='container-fluid'>
           <h1 className='text-center'>My Cart</h1>
           <div className='products-box'>
