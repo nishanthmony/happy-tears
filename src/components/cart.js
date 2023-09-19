@@ -3,6 +3,7 @@ import {Navbar} from './navbar'
 import { auth, fs } from '../Config/config'
 import { CartProducts } from './cartProducts';
 import StripeCheckout from 'react-stripe-checkout'
+import {Link} from 'react-router-dom'
 
 export const Cart = () => {
 
@@ -138,7 +139,9 @@ export const Cart = () => {
         </div>
       )}
       {cartProducts.length <1 && (
-        <div className='container-fluid'>No Products to show</div>
+        <div className='container-fluid'>No Products to show
+        <Link className='btn btn-danger btn-md' to = '/'>Add Items</Link>
+        </div>
       )}
     </>
   )
