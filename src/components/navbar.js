@@ -43,7 +43,7 @@ export const Navbar = ({ user, totalProducts }) => {
                 <div><Link to = 'Login'>Login</Link></div>
             </>}
             {user&&<>
-                <div className='navlink' >{user}</div>
+                <div className='navlink' ><b>Hi {user}</b></div>
                 <div className='cart-menu-btn'>
                     <Link className='navlink' to='/cart'>
                         <Icon icon = {shoppingCart} size = {20} />
