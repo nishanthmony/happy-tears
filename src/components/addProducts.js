@@ -42,12 +42,14 @@ export const AddProducts = () => {
             fs.collection('Products').add({
                 Title,
                 Description,
+                category,
                 Price: Number(Price),
                 url
             }).then(()=>{
                 setSuccessMsg('Product added successfully');
                 setTitle('');
                 setDescription('');
+                setCategory('');
                 setPrice('');
                 
                 document.getElementById('file').value='';
