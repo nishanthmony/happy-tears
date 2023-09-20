@@ -60,6 +60,8 @@ export const AddProducts = () => {
         })
     })
   }
+  //for category state changes
+  const [category, setCategory] = useState('');
 
   return (
     <div className='container'>
@@ -75,6 +77,20 @@ export const AddProducts = () => {
             <input type='text' className='form-control' required onChange={(e)=>setTitle(e.target.value)} value={Title}/>
             <br></br>
             <label>Product Description</label>
+            <input type='text' className='form-control' required onChange={(e)=>setDescription(e.target.value)} value={Description}/>
+            <br></br>
+            <label>Product Category</label>
+            <select className='form-control' required value={category} onChange={(e)=>setCategory(e.target.value)}>
+                <option value="">Select Product Category</option>
+                <option>Digital Art</option>
+                <option>Mossaic Art</option>
+                <option>Cartoon Art</option>
+                <option>Caricature</option>
+                <option>Wood Engraving</option>
+                <option>Mini Frames</option>
+                <option>Magic Mirror</option>
+                <option>Heart Collage</option>
+            </select>
             <input type='text' className='form-control' required onChange={(e)=>setDescription(e.target.value)} value={Description}/>
             <br></br>
             <label>Product Price</label>

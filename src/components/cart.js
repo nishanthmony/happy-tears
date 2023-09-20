@@ -119,7 +119,7 @@ export const Cart = () => {
       {cartProducts.length >= 1 && (
         <div className='container-fluid'>
           <h1 className='text-center'>My Cart</h1>
-          <div className='products-box'>
+          <div className='products-box cart'>
             <CartProducts cartProducts={cartProducts}
             cartProductIncrease={cartProductIncrease} cartProductDecrease={cartProductDecrease} />
           </div>
