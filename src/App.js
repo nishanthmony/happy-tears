@@ -18,9 +18,9 @@ const App = () => {
     <div>
       <BrowserRouter>
       <Switch>
+        <Route exact path = '/login' component = {LogIn} />
         <Route exact path = '/' component = {Home} />
         <Route path = '/signup' component = {SignUp} />
-        <Route path = '/login' component = {LogIn} />
         <Route path = '/add-products' component = {AddProducts} />
         <Route path = '/cart' component = {Cart} />
         <Route path = '/support' component = {Support} />

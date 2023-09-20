@@ -44,15 +44,11 @@
 
 /* navbar */
 .navbar{
-  overflow: hidden;
   width: 100%;
   padding: 24px;
   display: flex;
-  transition: 0.4s;
-  position: fixed;
   justify-content: space-between;
   align-items: center;
-  top: 0;
   background: linear-gradient(90deg, lightpink, white); 
 }
 .navbar.active{
@@ -69,7 +65,6 @@
 .navbar .logo{
   width: 150px;
   height: auto;
-  transition: 0.4s;
 }
 
 .navbar .logo img{
