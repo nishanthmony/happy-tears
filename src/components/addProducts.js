@@ -93,7 +93,6 @@ export const AddProducts = () => {
                 <option>Magic Mirror</option>
                 <option>Heart Collage</option>
             </select>
-            <input type='text' className='form-control' required onChange={(e)=>setDescription(e.target.value)} value={Description}/>
             <br></br>
             <label>Product Price</label>
             <input type='number' className='form-control' required onChange={(e)=>setPrice(e.target.value)} value={Price}/>
