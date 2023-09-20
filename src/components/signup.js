@@ -79,7 +79,7 @@ export const SignUp = () => {
             </div>
         </form>
         <br></br>
-        <Link to = '/' className = 'link'>Skip Signup</Link>
+        <Link to = '/home' className = 'link'>Skip Signup</Link>
         {ErrorMsg&&<>
             <div className='error-msg'>{ErrorMsg}</div>
             <br></br>

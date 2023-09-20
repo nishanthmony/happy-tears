@@ -34,7 +34,7 @@ export const Navbar = ({ user, totalProducts }) => {
     <div className={navbar ? 'navbar active' : 'navbar'}>
         <div className='leftside'>
             <div className='logo'>
-                <Link className='navlink' to = '/'><img src={logo} alt='' /></Link>
+                <Link className='navlink' to = '/home'><img src={logo} alt='' /></Link>
             </div>
         </div>
         <div className='rightside'>

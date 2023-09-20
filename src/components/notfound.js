@@ -5,7 +5,7 @@ export const Error = () => {
   return (
     <div className='container-fluid'>
       <p>Error 404 check for spelling mistakes and please go back and try again.</p>
-      <Link to = '/'>Get To the Homepage</Link>
+      <Link to = '/home'>Get To the Homepage</Link>
     </div>
   )
 }

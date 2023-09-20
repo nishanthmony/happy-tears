@@ -140,7 +140,7 @@ export const Cart = () => {
       )}
       {cartProducts.length <1 && (
         <div className='container-fluid'>No Products to show
-        <Link className='btn btn-danger btn-md' to = '/'>Add Items</Link>
+        <Link className='btn btn-danger btn-md' to = '/home'>Add Items</Link>
         </div>
       )}
     </>
