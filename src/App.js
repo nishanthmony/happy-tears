@@ -18,8 +18,8 @@ const App = () => {
     <div>
       <BrowserRouter>
       <Switch>
-        <Route path = '/login' component = {LogIn} />
-        <Route path = '/' component = {LogIn} />
+        <Route exact path = '/' component = {LogIn} />
+        <Route path = '/Login' component = {LogIn} />
         <Route path = '/home' component = {Home} />
         <Route path = '/signup' component = {SignUp} />
         <Route path = '/add-products' component = {AddProducts} />
