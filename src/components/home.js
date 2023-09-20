@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar } from './navbar'
 import { Products } from './products'
+import {IndividualFilteredProducts} from './individualFilteredProducts'
 import { auth, fs } from '../Config/config'
 import { HappyTears } from './happyTears'
 
@@ -93,23 +94,86 @@ export const Home = (props) => {
     }
   }
 
+  //categories list rendering using span
+  const [spans] = useState([
+    {id: 'DigitalArt', text:'Digital Art'},
+    {id: 'MossaicArt', text:'Mossaic Art'},
+    {id: 'CartoonArt', text:'Cartoon Art'},
+    {id: 'Caricature', text:'Caricature'},
+    {id: 'WoodEngraving', text:'Wood Engraving'},
+    {id: 'MiniFrames', text:'Mini Frames'},
+    {id: 'MagicMirror', text:'Magic Mirror'},
+    {id: 'HeartCollage', text:'Heart Collage'},
+  ])
+
+
+  //handleChange function
+  const [active, setActive] = useState('');
+  const [category, setCategory] = useState('');
+
+  const handleChange = (individualSpan) =>{
+    setActive(individualSpan.id);
+    setCategory(individualSpan.text);
+    filterFunction(individualSpan.text);
+  }
+
+  // filtered products
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  //filter function
+  const filterFunction = (text) =>{
+    const filter = DisplayProducts.filter((DisplayProducts)=>DisplayProducts.Title===text);
+    setFilteredProducts(filter);
+  }
+
+  //allproducts display
+  const returnToAllProducts = () => {
+    setActive('');
+    setCategory('');
+    setFilteredProducts([]);
+  }
 
   return (
     <div>
         <Navbar user={user} totalProducts={totalProducts}/>
         <br></br>
         <HappyTears />
-        {DisplayProducts.length > 0 && (
-          <div className='container-fluid'>
-            <h1 className='text-center'>Products</h1>
-            <div className='products-box'>
-              <Products DisplayProducts = {DisplayProducts} addToCart = {addToCart}/>
-            </div>
+        <div className='container-fluid filter-products-main-box' >
+          <div className='filter-box'>
+            <h6>Filter by category</h6>
+            {spans.map((individualSpan, index)=>(
+              <span key={index} id={individualSpan.id} onClick={()=>handleChange(individualSpan)} className={individualSpan.id===active ? active:'deactive'}>{individualSpan.text}</span>
+
+            ))}
           </div>
-        )}
-        {DisplayProducts.length < 1 && (
-          <div className='container-fluid'>Please wait...</div>
-        )}
+          {filteredProducts.length > 0 &&(
+            <div className='my-products'>
+              <h1 className='text-center'>{category}</h1>
+              <a href="javascript:void(0)" onClick={returnToAllProducts}>Return to All Products</a>
+              <div className='products-box'>
+                {filteredProducts.map(individualFilteredProducts=>(
+                  <IndividualFilteredProducts key={individualFilteredProducts.ID}
+                  individualFilteredProducts = {individualFilteredProducts} addToCart = {addToCart}/>
+                ))}
+              </div>
+            </div>
+          )}
+          {filteredProducts.length < 1 &&(
+            <>
+              {DisplayProducts.length > 0 && (
+                <div className='my-products'>
+                  <h1 className='text-center'>All Products</h1>
+                  <div className='products-box'>
+                    <Products DisplayProducts = {DisplayProducts} addToCart = {addToCart}/>
+                  </div>
+                </div>
+              )}
+              {DisplayProducts.length < 1 && (
+                <div className='my-products please-wait'>Please wait...</div>
+              )}
+            </>
+          )}
+        </div>
     </div>
   )
 }

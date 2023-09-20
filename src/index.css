@@ -107,6 +107,7 @@
 /* products */
 .products-box{
   width: 100%;
+  height: 670px;
   overflow-y: scroll;
   display: flex;
   flex-direction: row;
@@ -383,22 +384,22 @@
   font-size: 14px;
 }
 
-.filter-box span.ElectronicDevices{
-  color: #e00a02;
+.filter-box span.DigitalArt{
+  color: rgb(197, 134, 145);
 }
 
-.filter-box span.MobileAccessories{
-  color: #e00a02;
+.filter-box span.MossaicArt{
+  color: rgb(197, 134, 145);
 }
 
-.filter-box span.TVAndHomeAppliances{
-  color: #e00a02;
+.filter-box span.CartoonArt{
+  color: rgb(197, 134, 145);
 }
 
-.filter-box span.SportsAndOutdoors{
-  color: #e00a02;
+.filter-box span.Caricature{
+  color: rgb(197, 134, 145);
 }
 
-.HealthAndBeauty,.HomeAndLifestyle,.MensFashion,.WatchesBagsAndJewellery,.Groceries{
-  color: #e00a02;
+.WoodEngraving,.MiniFrames,.MagicMirror,.HeartCollage{
+  color: rgb(197, 134, 145);
 }
