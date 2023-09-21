@@ -4,8 +4,22 @@ import { auth, fs } from '../Config/config'
 import { CartProducts } from './cartProducts';
 import StripeCheckout from 'react-stripe-checkout'
 import {Link} from 'react-router-dom'
+import { Modal } from './modal';
 
 export const Cart = () => {
+
+  //show modal state
+  const [showModal, setShowModal] = useState(false);
+
+  const triggerModal= () =>{
+    setShowModal(true);
+  }
+
+  //hide modal
+  const hideModal=()=>{
+    setShowModal(false);
+  }
+
 
   //current user information fuction
   function GetCurrentUser(){
@@ -135,6 +149,9 @@ export const Cart = () => {
             shippingAddress 
             name='All Products' 
             amount={totalAmt * 100}></StripeCheckout>
+            {/**<br></br>**/}
+            <h6 className='text-center' style={{marginTop: 7+'px'}}>OR</h6>
+            <button className='btn btn-secondary btn-md' onClick={()=>triggerModal()}>Cash on Delivery</button>
           </div>
         </div>
       )}
@@ -142,6 +159,9 @@ export const Cart = () => {
         <div className='container-fluid'>No Products to show
         <Link className='btn btn-danger btn-md' to = '/home'>Add Items</Link>
         </div>
+      )}
+      {showModal === true && (
+        <Modal TotalPrice={totalAmt} hideModal={hideModal} totalQty={totalQty} />
       )}
     </>
   )

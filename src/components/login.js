@@ -17,7 +17,7 @@ export const LogIn = () => {
     e.preventDefault();
     //console.log(Email, Password)
     auth.signInWithEmailAndPassword(email, password).then(()=>{
-      setSuccessMessage('Login Successful, wellcome to the world of Surprises')
+      setSuccessMessage('Login Successful, welcome to the world of Surprises')
       setEmail('');
       setPassword('');
       setErrorMessage('');
