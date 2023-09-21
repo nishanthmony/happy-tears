@@ -1,23 +1,22 @@
 import React, { useState } from 'react'
 import { auth, fs } from '../Config/config';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
-
-toast.configure();
 
 export const Modal = ({ totalQty, TotalPrice, hideModal }) => {
+
+
     const [cell, setCell] = useState(null);
     const [cartPrice] = useState(TotalPrice);
     const [residentialaddress, setResidentialAddress] = useState('');
     const [cartQty] = useState(totalQty);
 
     const history = useHistory();
-
     
     const handleCloseModal=()=>{
         hideModal();
     }
+
+    const [successMsg, setSuccessMessage] = useState('');
 
     //cash on delivery
     const handleCashOnDelivery=async(e)=>{
@@ -41,22 +40,16 @@ export const Modal = ({ totalQty, TotalPrice, hideModal }) => {
             await fs.collection('Cart '+uid).doc(snap.id).delete();
         }
         hideModal();
-        history.push('/home');
-        toast.success('Your order has been placed successfully', {
-            position: 'top-right',
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-        });
+        setSuccessMessage('Login Successful, welcome to the world of Surprises');
+        setTimeout(()=>{
+            setSuccessMessage('');
+            history.push('/home');
+        })
     }
   return (
     <div className='shade-area'>
         <div className='modal-container'>
         <form className='form-group' onSubmit={handleCashOnDelivery}>
-            <label>Product Title</label>
             <input type='number' className='form-control' placeholder='Mobile No' required onChange={(e)=>setCell(e.target.value)} value={cell}/>
             <br></br>
             <input type='text' className='form-control' placeholder='Residential Address' required onChange={(e)=>setResidentialAddress(e.target.value)} value={residentialaddress}/>
@@ -71,6 +64,9 @@ export const Modal = ({ totalQty, TotalPrice, hideModal }) => {
         </form>
         <div className='delete-icon' onClick={handleCloseModal}> x </div>
         </div>
+        {successMsg&&<>
+            <div className='success-msg'>{successMsg}</div>        
+        </>}
     </div>
   )
 }

@@ -24,7 +24,7 @@ export const LogIn = () => {
       setTimeout(()=>{
         setSuccessMessage('');
         history.push('/home')
-      },3000)
+      },2000)
     }).catch(error=>setErrorMessage(error.message));
   }
 
